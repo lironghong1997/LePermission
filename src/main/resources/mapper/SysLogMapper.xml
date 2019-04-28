@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.permission.mapper.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.permission.model.SysLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="targer_id" property="targerId" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operater_time" property="operaterTime" jdbcType="TIMESTAMP" />
+    <result column="operater_ip" property="operaterIp" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.permission.model.SysLogWithBLOBs" extends="BaseResultMap" >
+    <result column="old_value" property="oldValue" jdbcType="LONGVARCHAR" />
+    <result column="new_value" property="newValue" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, targer_id, operator, operater_time, operater_ip, status
+  </sql>
+  <sql id="Blob_Column_List" >
+    old_value, new_value
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.permission.model.SysLogWithBLOBs" >
+    insert into sys_log (id, type, targer_id, 
+      operator, operater_time, operater_ip, 
+      status, old_value, new_value
+      )
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{targerId,jdbcType=INTEGER}, 
+      #{operator,jdbcType=VARCHAR}, #{operaterTime,jdbcType=TIMESTAMP}, #{operaterIp,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{oldValue,jdbcType=LONGVARCHAR}, #{newValue,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.permission.model.SysLogWithBLOBs" >
+    insert into sys_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="targerId != null" >
+        targer_id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operaterTime != null" >
+        operater_time,
+      </if>
+      <if test="operaterIp != null" >
+        operater_ip,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="oldValue != null" >
+        old_value,
+      </if>
+      <if test="newValue != null" >
+        new_value,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="targerId != null" >
+        #{targerId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operaterTime != null" >
+        #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operaterIp != null" >
+        #{operaterIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="oldValue != null" >
+        #{oldValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newValue != null" >
+        #{newValue,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.permission.model.SysLogWithBLOBs" >
+    update sys_log
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="targerId != null" >
+        targer_id = #{targerId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operaterTime != null" >
+        operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operaterIp != null" >
+        operater_ip = #{operaterIp,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="oldValue != null" >
+        old_value = #{oldValue,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="newValue != null" >
+        new_value = #{newValue,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.permission.model.SysLogWithBLOBs" >
+    update sys_log
+    set type = #{type,jdbcType=INTEGER},
+      targer_id = #{targerId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      operater_ip = #{operaterIp,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      old_value = #{oldValue,jdbcType=LONGVARCHAR},
+      new_value = #{newValue,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.permission.model.SysLog" >
+    update sys_log
+    set type = #{type,jdbcType=INTEGER},
+      targer_id = #{targerId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      operater_ip = #{operaterIp,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

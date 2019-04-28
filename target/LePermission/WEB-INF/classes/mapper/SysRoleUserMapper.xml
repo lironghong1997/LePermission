@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.permission.mapper.SysRoleUserMapper" >
+  <resultMap id="BaseResultMap" type="com.permission.model.SysRoleUser" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="operater_time" property="operaterTime" jdbcType="TIMESTAMP" />
+    <result column="operater_ip" property="operaterIp" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, user_id, operator, operater_time, operater_ip
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_role_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.permission.model.SysRoleUser" >
+    insert into sys_role_user (id, role_id, user_id, 
+      operator, operater_time, operater_ip
+      )
+    values (#{id,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{operator,jdbcType=VARCHAR}, #{operaterTime,jdbcType=TIMESTAMP}, #{operaterIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.permission.model.SysRoleUser" >
+    insert into sys_role_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="operaterTime != null" >
+        operater_time,
+      </if>
+      <if test="operaterIp != null" >
+        operater_ip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operaterTime != null" >
+        #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operaterIp != null" >
+        #{operaterIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.permission.model.SysRoleUser" >
+    update sys_role_user
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="operaterTime != null" >
+        operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="operaterIp != null" >
+        operater_ip = #{operaterIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.permission.model.SysRoleUser" >
+    update sys_role_user
+    set role_id = #{roleId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      operator = #{operator,jdbcType=VARCHAR},
+      operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      operater_ip = #{operaterIp,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

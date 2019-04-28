@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+        <!--忽略不能处理的占位-->
+        <property name="ignoreUnresolvablePlaceholders" value="true"/>
+        <!--从哪里取配置文件-->
+        <property name="locations">
+            <list>
+                <value>classpath:mysql.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close" >
+        <property name="driverClassName" value="${mysql.driverclassname}"></property>
+        <property name="url" value="${mysql.url}"></property>
+        <property name="username" value="${mysql.username}"></property>
+        <property name="password" value="${mysql.password}"></property>
+        <property name="initialSize" value="${mysql.initialSize}"></property><!--初始数量-->
+        <property name="minIdle" value="${mysql.minIdle}"></property><!--最小空闲数-->
+        <property name="maxActive" value="${mysql.maxActive}"></property><!--最大活跃数量-->
+        <property name="maxWait" value="${mysql.maxWait}"></property><!--最长等待时间-->
+        <property name="filters" value="${mysql.filters}"></property><!--druid独有的 支持filters-->
+    </bean>
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.permission.mapper"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--tx 事物-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    <!--启动事物注解-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <!--druid 主要监控数据库相关的 druid有专门的访问接口以及界面管理的-->
+    <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
+        <!--超过3000毫秒就表示是个慢sql需要人工处理-->
+        <property name="slowSqlMillis" value="3000"/>
+        <!--如果发现了慢sql，可以用log的形式记录下来-->
+        <property name="logSlowSql" value="true"/>
+        <!--如果sql很多行可以帮我们合并到一起-->
+        <property name="mergeSql" value="true"/>
+    </bean>
+    <bean id="wall-filter" class="com.alibaba.druid.wall.WallFilter">
+        <!--声明监控的数据库是MySQL-->
+        <property name="dbType" value="mysql"/>
+    </bean>
+</beans>

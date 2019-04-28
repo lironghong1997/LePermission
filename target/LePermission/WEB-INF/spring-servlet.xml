@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!--上下文的注解能直接被使用 有了这个标签 spring上下文的注解就能自动被springbean进行管理-->
+    <context:annotation-config/>
+    <!--启动注解驱动的spring mvc功能-->
+    <mvc:annotation-driven/>
+    <!--interceptor配置-->
+    <mvc:interceptors>
+        <bean class="com.permission.common.HttpInterceptor"></bean>
+    </mvc:interceptors>
+    <!--启动包扫描功能-->
+    <context:component-scan base-package="com.permission.controller"/>
+    <context:component-scan base-package="com.permission.service"/>
+
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
+    <bean class="com.permission.common.SpringExceptionResolver" name="springExceptionResolver"/>
+    <bean class="com.permission.common.ApplicationContextHelper" lazy-init="false"></bean>
+
+
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+
+    <bean id="jsonView" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/template/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
