@@ -1,4 +1,5 @@
 package com.permission.model;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 * @date: 2019/4/2 17:56
 * @description: 
 */
+@Builder
 @Data
 public class SysDepe {
     private Integer id;

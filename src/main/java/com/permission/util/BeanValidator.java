@@ -88,7 +88,8 @@ public class BeanValidator {
       <version>1.10</version>
     </dependency>
         * */
-        if (MapUtils.isEmpty(map)) {
+        if (MapUtils.isNotEmpty(map)) {
+
             throw new ParamException(map.toString());
         }
     }

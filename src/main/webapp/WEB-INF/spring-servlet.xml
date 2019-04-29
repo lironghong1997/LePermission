@@ -15,6 +15,7 @@
     <!--启动包扫描功能-->
     <context:component-scan base-package="com.permission.controller"/>
     <context:component-scan base-package="com.permission.service"/>
+    <context:component-scan base-package="com.permission.mapper"/>
 
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>-->
     <bean class="com.permission.common.SpringExceptionResolver" name="springExceptionResolver"/>

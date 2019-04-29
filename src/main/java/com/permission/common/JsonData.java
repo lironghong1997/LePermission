@@ -13,9 +13,10 @@ import java.util.Map;
 */
 @Data
 public class JsonData {
+
     private boolean ret;
-    private String msg;
-    private Object data;
+    private String  msg;
+    private Object  data;
 
     public JsonData (boolean ret){
         this.ret=ret;
@@ -33,6 +34,7 @@ public class JsonData {
         jsonData.data=object;
         return jsonData;
     }
+
     public static JsonData success(){
       return new JsonData(true);
     }

@@ -18,9 +18,6 @@ import java.util.Map;
 @Slf4j
 public class HttpInterceptor extends HandlerInterceptorAdapter {
 
-    public HttpInterceptor() {
-        super();
-    }
     //请求处理之前
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -44,8 +41,4 @@ public class HttpInterceptor extends HandlerInterceptorAdapter {
         log.info("request exception url:{},paramterMap:{}",url, JsonUtils.objtoString(parameterMap));
     }
 
-    @Override
-    public void afterConcurrentHandlingStarted(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        super.afterConcurrentHandlingStarted(request, response, handler);
-    }
 }
