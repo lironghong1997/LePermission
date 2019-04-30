@@ -10,9 +10,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class LevelUtil {
     //定义层级之间的分隔符
-    private final static String SEPARATOR = ".";
+    public final static String SEPARATOR = ".";
     //定义root的id从0开始
-    private final static String ROOT = "0";
+    public  final static String ROOT = "0";
     //定义部门level的计算规则
     /*
     * 0

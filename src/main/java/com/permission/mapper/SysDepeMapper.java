@@ -2,6 +2,9 @@ package com.permission.mapper;
 
 
 import com.permission.model.SysDepe;
+
+import java.util.List;
+
 /**
 * @version:1.0.0
 * @author: lironghong
@@ -20,4 +23,7 @@ public interface SysDepeMapper {
     int updateByPrimaryKeySelective(SysDepe record);
 
     int updateByPrimaryKey(SysDepe record);
+
+    //获取当前用户的部门列表
+    List<SysDepe> getAllDept();
 }
