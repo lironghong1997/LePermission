@@ -2,7 +2,6 @@ package com.permission.controller;
 
 import com.permission.common.JsonData;
 import com.permission.service.SysDeptService;
-import com.permission.util.BeanValidator;
 import com.permission.vo.DeptVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +26,6 @@ public class SysDeptController {
     @PostMapping("/save.json")
     @ResponseBody
     public JsonData saveDept(DeptVo deptVo) {
-
-        BeanValidator.check(deptVo);
         sysDeptService.save(deptVo);
         return JsonData.success();
     }
