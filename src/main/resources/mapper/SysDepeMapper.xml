@@ -144,4 +144,30 @@
     <include refid="Base_Column_List" />
     from sys_dept
   </select>
+
+  <select id="getChildDeptListByLevel" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_dept
+    where levle like #{levle} || '.%' /*拼接相当于 levle like '0.%'*/
+  </select>
+
+  <update id="batchUpdateLevle" parameterType="list">
+    /*因为是list所以要循环更新  1:参数名称 2:别名 3:每个sql用分号分割*/
+    <foreach collection="depeList" item="sysdept" separator=";">
+      update sys_dept
+      set level = #{dept.levle}
+      where id = #{dept.id}
+    </foreach>
+  </update>
+
+  <select id="countByNameAndParentId" resultType="java.lang.Integer" parameterType="map">
+    select count(1)
+    from sys_dept
+    where parent_id = #{parentId}
+    and name = #{deptname}
+    <if test="deptId != null">
+      and id = #{deptId}
+    </if>
+  </select>
 </mapper>

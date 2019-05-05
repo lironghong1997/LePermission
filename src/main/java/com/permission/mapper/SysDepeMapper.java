@@ -2,6 +2,7 @@ package com.permission.mapper;
 
 
 import com.permission.model.SysDepe;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -26,4 +27,10 @@ public interface SysDepeMapper {
 
     //获取当前用户的部门列表
     List<SysDepe> getAllDept();
+
+    List<SysDepe> getChildDeptListByLevel(@Param("levle") String levle);
+    //批量更新levle
+    void batchUpdateLevle(@Param("depeList") List<SysDepe> depeList);
+
+    int countByNameAndParentId(@Param("parentId") Integer parentId,@Param("deptname") String deptname, @Param("deptId") Integer deptId);
 }

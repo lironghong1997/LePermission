@@ -31,6 +31,7 @@ public class SysDeptController {
     @Autowired
     SysTreeService sysTreeService;
 
+    //新增部门接口
     @PostMapping("/save.json")
     @ResponseBody
     public JsonData saveDept(DeptVo deptVo) {
@@ -46,4 +47,13 @@ public class SysDeptController {
         List<DeptLevleVo> deptTreeList = sysTreeService.deptTrees();
         return JsonData.success(deptTreeList);
     }
+
+    //新增部门接口
+    @PostMapping("/update.json")
+    @ResponseBody
+    public JsonData updateDept(DeptVo deptVo) {
+        sysDeptService.update(deptVo);
+        return JsonData.success();
+    }
+
 }
