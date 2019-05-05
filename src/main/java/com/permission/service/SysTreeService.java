@@ -90,7 +90,7 @@ public class SysTreeService {
                         return o1.getSeq() - o2.getSeq();
                     }
                 });
-                //设置下一层部门
+                //设置下一层dept
                 deptLevleVo.setDeptLevlelist(tempDeptList);
                 //进入到下一层
                 transformDeptTree(tempDeptList,nextlevle,levleVoMultimap);

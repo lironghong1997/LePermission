@@ -167,7 +167,7 @@
     where parent_id = #{parentId}
     and name = #{deptname}
     <if test="deptId != null">
-      and id = #{deptId}
+      and id != #{deptId}
     </if>
   </select>
 </mapper>

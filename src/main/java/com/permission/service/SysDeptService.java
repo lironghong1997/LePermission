@@ -47,9 +47,7 @@ public class SysDeptService {
         }
         //判断更新的部门是否存在
         SysDepe before = sysDepeMapper.selectByPrimaryKey(deptVo.getId());
-
         Preconditions.checkNotNull(before,"待更新部门不存在");
-
         SysDepe after = SysDepe.builder().id(deptVo.getId()).name(deptVo.getName()).parentId(deptVo.getParentId()).seq(deptVo.getSeq()).remark(deptVo.getRemark()).build();
         after.setLevle(LevelUtil.levelroolcalc(getLevel(deptVo.getParentId()),deptVo.getParentId()));
         after.setOperator("system-update");//TODO
