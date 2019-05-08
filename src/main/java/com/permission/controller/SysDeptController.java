@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -30,7 +31,10 @@ public class SysDeptController {
 
     @Autowired
     SysTreeService sysTreeService;
-
+    @RequestMapping("/dept.page")
+    public ModelAndView page(){
+        return new  ModelAndView("dept");
+    }
     //新增部门接口
     @PostMapping("/save.json")
     @ResponseBody
@@ -42,13 +46,12 @@ public class SysDeptController {
     //部门树的请求
     @GetMapping("/deptTree.json")
     @ResponseBody
-
     public JsonData deptTree() {
         List<DeptLevleVo> deptTreeList = sysTreeService.deptTrees();
         return JsonData.success(deptTreeList);
     }
 
-    //新增部门接口
+    //修改部门接口
     @PostMapping("/update.json")
     @ResponseBody
     public JsonData updateDept(DeptVo deptVo) {

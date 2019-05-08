@@ -1,6 +1,9 @@
 package com.permission.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 /**
@@ -10,6 +13,9 @@ import java.util.Date;
 * @description: 
 */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class SysUser {
     private Integer id;
 
@@ -31,6 +37,6 @@ public class SysUser {
 
     private String operaterIp;
 
-    private byte[] operator;
+    private String operator;
 
 }

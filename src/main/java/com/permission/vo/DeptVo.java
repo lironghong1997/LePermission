@@ -18,7 +18,7 @@ public class DeptVo {
     @NotBlank(message = "部门名称不能为空")
     @Length(max = 15,min = 2,message = "部门名称最大长度15个字符，最小长度2个字符")
     private String name;
-    private Integer parentId;
+    private Integer parentId = 0;
     @NotNull(message = "展示顺序不可以为空")
     private Integer seq;
     @Length(max = 150,message = "备注的长度不能超过150个字")

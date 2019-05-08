@@ -1,6 +1,11 @@
 package com.permission.mapper;
 
+import com.permission.beans.PageQuery;
 import com.permission.model.SysUser;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
 /**
 * @version:1.0.0
 * @author: lironghong
@@ -21,4 +26,9 @@ public interface SysUserMapper {
     int updateByPrimaryKeyWithBLOBs(SysUser record);
 
     int updateByPrimaryKey(SysUser record);
+
+    //查询符合分页条件的总条数
+    int countByDeptId(@Param("deptid") int deptid);
+
+    List<SysUser> getPageByDeptId(@Param("deptid") Integer deptid, @Param("pageQuery") PageQuery pageQuery);
 }
